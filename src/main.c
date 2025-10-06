@@ -9,10 +9,10 @@ int main() {
     
     printf("=== Testing Dynamic Resizing ===\n");
     const char* keys[] = {"name", "age", "city", "country", "email", "phone", 
-                          "address", "zip", "state", "occupation"};
-    const char* values[] = {"Andrea", "21", "Mexico", "Mexico", 
+                          "address", "zip", "state", "occupation" };
+    const char* values[] = {"Andrea", "21", "Guadalajara", "Mexico", 
                             "andrea@example.com", "442-555-1234", 
-                            "Av. 5 de Febrero 123", "76000", "Querétaro", "Nurse"};
+                            "Av. 5 de Febrero 123", "76000", "Querétaro", "Nurse" };
     
     for (int i = 0; i < 10; i++) {
         size_t prev_size = ht->size;
