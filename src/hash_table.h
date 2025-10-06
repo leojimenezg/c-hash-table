@@ -19,4 +19,6 @@ HashTable* new_hash_table(size_t init_size);
 
 void destroy_hash_table(HashTable* ht);
 
+int add_item(HashTable* ht, const char* key, const char* value);
+
 #endif
