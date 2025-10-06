@@ -52,7 +52,7 @@ static double get_load_factor(HashTable* ht) {
 
 /**
 * @brief Searches the items of a bucket of a key.
-* "search_bucket_ite,s" searches all of the items from a bucket looking for an
+* "search_bucket_items" searches all of the items from a bucket looking for an
 * specific key. It expects to start at the first item of the bucket.
 * @param first_item First item of the bucket.
 * @param key Key to look up for.
@@ -105,3 +105,33 @@ char* get_item(HashTable* ht, const char* key) {
 	if (item == NULL) return NULL;
 	return item->value;
 }
+
+int delete_item(HashTable* ht, const char* key) {
+	unsigned long index = hash_function(key, ht->size);
+	Item* prev = ht->buckets[index];
+	if (prev == NULL) return -1;
+	if (strcmp(prev->key, key) == 0) {
+		ht->buckets[index] = prev->next;
+		free(prev->key);
+		free(prev->value);
+		free(prev);
+		ht->count--;
+		return 0;
+	}
+	Item* current = prev->next;
+	while (current != NULL) {
+		if (strcmp(current->key, key) == 0) {
+			prev->next = current->next;
+			free(current->key);
+			free(current->value);
+			free(current);
+			ht->count--;
+			return 0;
+		}
+		prev = current;
+		current = current->next;
+	}
+	return -1;
+}
+
+void resize_hash_table();
